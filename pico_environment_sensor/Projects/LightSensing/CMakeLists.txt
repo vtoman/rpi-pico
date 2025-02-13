@@ -41,8 +41,8 @@ pico_set_program_name(LightSensing "LightSensing")
 pico_set_program_version(LightSensing "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(LightSensing 0)
-pico_enable_stdio_usb(LightSensing 1)
+pico_enable_stdio_uart(LightSensing 1)
+pico_enable_stdio_usb(LightSensing 0)
 
 # Add the standard library to the build
 target_link_libraries(LightSensing
@@ -60,4 +60,3 @@ target_link_libraries(LightSensing
         )
 
 pico_add_extra_outputs(LightSensing)
-
