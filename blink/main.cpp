@@ -1,21 +1,21 @@
 /**
- *  Test for Raspberry Pi Pico board led light.
+ *  RPI Pico 2W board led light.
  */
 
-#include "pico/stdlib.h"
-#include "led.h"
-
-#define LED_DELAY_ON_MS  30
-#define LED_DELAY_OFF_MS 5000
-
-int main()
-{
-    pico_led_init();
-    while (true)
-    {
-        pico_set_led(true);
-        sleep_ms(LED_DELAY_ON_MS);
-        pico_set_led(false);
-        sleep_ms(LED_DELAY_OFF_MS);
-    }
-}
+ #include "pico/stdlib.h"
+ #include "pico/cyw43_arch.h"
+ 
+ int main() {
+     stdio_init_all();
+     if (cyw43_arch_init()) {
+         printf("Wi-Fi init failed");
+         return -1;
+     }
+     while (true) {
+        printf("The blink has blinked!\n");
+         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
+         sleep_ms(10);
+         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+         sleep_ms(10000);
+     }
+ }
