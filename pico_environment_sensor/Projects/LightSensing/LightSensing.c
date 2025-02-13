@@ -1,3 +1,8 @@
+/**
+ * Channel 0 is 16 bit register that contains value of full spectrum (visible and infrared) light sensed.
+ * Channel 1 is 16 bit register that contains value of infrared light sensed.
+ */
+
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
@@ -114,7 +119,7 @@ void readSensorChannels()
             uint16_t ch0 = ((uint16_t)data[1] << 8) | data[0];
             uint16_t ch1 = ((uint16_t)data[3] << 8) | data[2];
 
-            printf("CH0: %u, CH1: %u, Lux: %.2f\n", ch0, ch1);
+            printf("CH0: %u, CH1: %u\n", ch0, ch1);
         }
     }
 }
