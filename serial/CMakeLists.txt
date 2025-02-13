@@ -51,5 +51,5 @@ endif()
 pico_add_extra_outputs(serial)
 
 # add url via pico_set_program_url
-pico_enable_stdio_usb(serial 1)
-pico_enable_stdio_uart(serial 0)
+pico_enable_stdio_usb(serial 0)
+pico_enable_stdio_uart(serial 1)

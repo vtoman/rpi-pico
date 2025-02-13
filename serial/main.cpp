@@ -16,10 +16,11 @@ int main() {
 
     int i = 0;
 
-    std::cout << "Test for serial output\n";
+    cout << endl << "Test for serial output" << endl;
     printf("Counting: %d ", i);
     while (true) {
-        cout << ++i << " "; 
+        // Flush is needed as endl or \n is not used.
+        cout << ++i << " " << flush; 
         sleep_ms(1000);
     }
 }
