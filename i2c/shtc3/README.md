@@ -1,0 +1,1 @@
+# SHTC3 Temperature / Humidity sensor
