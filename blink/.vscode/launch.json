@@ -24,7 +24,8 @@
                 "load \"${command:raspberry-pi-pico.launchTargetPath}\""
             ],
             "openOCDLaunchCommands": [
-                "adapter speed 5000"
+                "adapter speed 5000",
+                "cmsis_dap_vid_pid 0x2E8A 0x000D"
             ]
         },
         {

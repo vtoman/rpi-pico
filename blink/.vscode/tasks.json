@@ -20,11 +20,18 @@
         {
             "label": "Run Project",
             "type": "process",
-            "command": "${env:HOME}/.pico-sdk/picotool/2.1.0/picotool/picotool",
+            "command": "${userHome}/.pico-sdk/openocd/0.12.0+dev/openocd.exe",
             "args": [
-                "load",
-                "${command:raspberry-pi-pico.launchTargetPath}",
-                "-fx"
+                "-s",
+                "${userHome}/.pico-sdk/openocd/0.12.0+dev/scripts",
+                "-f",
+                "interface/cmsis-dap.cfg",
+                "-c",
+                "cmsis_dap_vid_pid 0x2E8A ${input:debugProbe}",  // Select probe dynamically
+                "-f",
+                "target/${command:raspberry-pi-pico.getTarget}.cfg",
+                "-c",
+                "adapter speed 5000; program \"${command:raspberry-pi-pico.launchTargetPath}\" verify reset exit"
             ],
             "presentation": {
                 "reveal": "always",
@@ -32,9 +39,9 @@
             },
             "problemMatcher": [],
             "windows": {
-                "command": "${env:USERPROFILE}/.pico-sdk/picotool/2.1.0/picotool/picotool.exe"
+                "command": "${env:USERPROFILE}/.pico-sdk/openocd/0.12.0+dev/openocd.exe"
             }
-        },
+        },        
         {
             "label": "Flash",
             "type": "process",
@@ -44,6 +51,8 @@
                 "${userHome}/.pico-sdk/openocd/0.12.0+dev/scripts",
                 "-f",
                 "interface/cmsis-dap.cfg",
+                "-c",
+                "cmsis_dap_vid_pid 0x2E8A ${input:debugProbe}",  // Select probe dynamically
                 "-f",
                 "target/${command:raspberry-pi-pico.getTarget}.cfg",
                 "-c",
@@ -51,8 +60,20 @@
             ],
             "problemMatcher": [],
             "windows": {
-                "command": "${env:USERPROFILE}/.pico-sdk/openocd/0.12.0+dev/openocd.exe",
+                "command": "${env:USERPROFILE}/.pico-sdk/openocd/0.12.0+dev/openocd.exe"
             }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "debugProbe",
+            "type": "pickString",
+            "description": "Select Debug Probe",
+            "options": [
+                "0x000C",
+                "0x000D"
+            ],
+            "default": "0x000C"
         }
     ]
 }
